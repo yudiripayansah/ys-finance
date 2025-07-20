@@ -3,11 +3,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { db } from "../lib/firebase";
-import {
-  doc,
-  getDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import {
   updatePassword,
   reauthenticateWithCredential,
@@ -77,7 +73,10 @@ export default function SettingsPage() {
       setMessage({ type: "success", text: "Password berhasil diperbarui." });
     } catch (err) {
       console.error(err);
-      setMessage({ type: "error", text: "Password lama salah atau terlalu lemah." });
+      setMessage({
+        type: "error",
+        text: "Password lama salah atau terlalu lemah.",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -88,62 +87,63 @@ export default function SettingsPage() {
   return (
     <div className="max-w-4xl mx-auto px-4">
       <h1 className="text-2xl font-semibold mb-6">Pengaturan Akun</h1>
-
-      {/* Ubah Nama */}
-      <div className="mb-8">
-        <label className="block font-medium mb-1">Nama</label>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="w-full p-2 border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md mb-2"
-        />
-        <button
-          onClick={updateName}
-          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 disabled:opacity-50"
-          disabled={isLoading}
-        >
-          Simpan Nama
-        </button>
-      </div>
-
-      {/* Ubah Password */}
-      <div className="mb-8">
-        <label className="block font-medium mb-1">Password Saat Ini</label>
-        <input
-          type="password"
-          value={currentPassword}
-          onChange={(e) => setCurrentPassword(e.target.value)}
-          className="w-full p-2 border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md mb-2"
-        />
-        <label className="block font-medium mb-1">Password Baru</label>
-        <input
-          type="password"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          className="w-full p-2 border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md mb-2"
-        />
-        <button
-          onClick={updateUserPassword}
-          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 disabled:opacity-50"
-          disabled={isLoading}
-        >
-          Ganti Password
-        </button>
-      </div>
-
-      {/* Notifikasi */}
-      {message.text && (
-        <div
-          className={`mt-4 p-3 rounded ${
-            message.type === "success"
-              ? "bg-green-100 text-green-700"
-              : "bg-red-100 text-red-700"
-          }`}
-        >
-          {message.text}
+      <div className="bg-white dark:bg-gray-800 p-4 rounded shadow mb-6">
+        {/* Ubah Nama */}
+        <div className="mb-8">
+          <label className="block font-medium mb-1">Nama</label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full p-2 border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md mb-2"
+          />
+          <button
+            onClick={updateName}
+            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 disabled:opacity-50"
+            disabled={isLoading}
+          >
+            Simpan Nama
+          </button>
         </div>
-      )}
+
+        {/* Ubah Password */}
+        <div className="mb-8">
+          <label className="block font-medium mb-1">Password Saat Ini</label>
+          <input
+            type="password"
+            value={currentPassword}
+            onChange={(e) => setCurrentPassword(e.target.value)}
+            className="w-full p-2 border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md mb-2"
+          />
+          <label className="block font-medium mb-1">Password Baru</label>
+          <input
+            type="password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            className="w-full p-2 border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md mb-2"
+          />
+          <button
+            onClick={updateUserPassword}
+            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 disabled:opacity-50"
+            disabled={isLoading}
+          >
+            Ganti Password
+          </button>
+        </div>
+
+        {/* Notifikasi */}
+        {message.text && (
+          <div
+            className={`mt-4 p-3 rounded ${
+              message.type === "success"
+                ? "bg-green-100 text-green-700"
+                : "bg-red-100 text-red-700"
+            }`}
+          >
+            {message.text}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

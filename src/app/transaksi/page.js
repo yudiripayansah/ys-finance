@@ -214,12 +214,14 @@ export default function TransaksiPage() {
           </div>
           <div className="col-span-2 md:col-span-1">
             <label className="block text-sm font-medium mb-1">Tanggal</label>
+            <div className="w-full">
             <input
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
               className="w-full p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md "
             />
+            </div>
           </div>
           <div className="col-span-2">
             <label className="block text-sm font-medium mb-1">Catatan</label>
@@ -243,34 +245,53 @@ export default function TransaksiPage() {
 
       {/* Filter & Search */}
       <div className="flex flex-col md:flex-row gap-4 mb-4">
-        <input
-          type="text"
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-            setCurrentPage(1);
-          }}
-          placeholder="Cari catatan atau kategori..."
-          className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md w-full"
-        />
-        <input
-          type="date"
-          value={fromDate}
-          onChange={(e) => {
-            setFromDate(e.target.value);
-            setCurrentPage(1);
-          }}
-          className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md"
-        />
-        <input
-          type="date"
-          value={toDate}
-          onChange={(e) => {
-            setToDate(e.target.value);
-            setCurrentPage(1);
-          }}
-          className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md"
-        />
+        <div>
+          <label className="block text-sm font-medium mb-1">
+            Filter
+          </label>
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setCurrentPage(1);
+            }}
+            placeholder="Cari catatan atau kategori..."
+            className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md w-full"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium mb-1">
+            From
+          </label>
+          <div className="w-full">
+            <input
+              type="date"
+              value={fromDate}
+              onChange={(e) => {
+                setFromDate(e.target.value);
+                setCurrentPage(1);
+              }}
+              className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md w-full"
+            />
+          </div>
+        </div>
+        <div>
+          <label className="block text-sm font-medium mb-1">
+            To
+          </label>
+          <div className="w-full">
+            <input
+              type="date"
+              value={toDate}
+              onChange={(e) => {
+                setToDate(e.target.value);
+                setCurrentPage(1);
+              }}
+              className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md w-full"
+            />
+          </div>
+        </div>
       </div>
 
       {/* Daftar Transaksi */}

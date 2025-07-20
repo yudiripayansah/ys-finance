@@ -27,7 +27,16 @@ import {
   Legend,
 } from "recharts";
 
-const COLORS = ["#16a34a", "#dc2626", "#3b82f6", "#f59e0b", "#10b981", "#8b5cf6", "#ef4444", "#0ea5e9"];
+const COLORS = [
+  "#A3D9A5", // soft green
+  "#F6A6A6", // soft red/pink
+  "#A5C9F6", // soft blue
+  "#FFE6A7", // soft yellow
+  "#B3E5E0", // soft cyan
+  "#D8B4F8", // soft purple
+  "#FFD1DC", // soft pink
+  "#C2C2FF"  // soft indigo
+];
 export default function DashboardPage() {
   const { user } = useAuth();
   const [name, setName] = useState("");
@@ -157,8 +166,8 @@ export default function DashboardPage() {
             <XAxis dataKey="date" />
             <YAxis tickFormatter={(v) => `Rp${v.toLocaleString()}`} />
             <Tooltip formatter={(value) => `Rp${value.toLocaleString()}`} />
-            <Bar dataKey="income" fill="#16a34a" name="Income" />
-            <Bar dataKey="expense" fill="#dc2626" name="Expense" />
+            <Bar dataKey="income" fill="#A3D9A5" name="Pemasukan" />
+            <Bar dataKey="expense" fill="#F6A6A6" name="Pengeluaran" />
           </BarChart>
         </ResponsiveContainer>
       </div>

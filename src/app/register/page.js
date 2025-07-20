@@ -7,9 +7,11 @@ import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/aut
 import { auth } from '../lib/firebase';
 import { db } from '../lib/firebase';
 import { doc, setDoc } from 'firebase/firestore';
+import { useAuth } from "../context/AuthContext";
 
 export default function RegisterPage() {
   const router = useRouter();
+  const { user } = useAuth();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -49,7 +51,7 @@ export default function RegisterPage() {
       setIsLoading(false);
     }
   };
-
+  if (user) return null;
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
       <form
