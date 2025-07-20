@@ -53,22 +53,22 @@ export default function TransaksiPage() {
 
   // Ambil kategori
   useEffect(() => {
-    if (user) {
-      const q = query(
-        collection(db, "categories"),
-        where("userId", "==", user.uid),
-        orderBy("name", "asc")
-      );
-      const unsubscribe = onSnapshot(q, (snapshot) => {
-        const cats = [];
-        snapshot.forEach((doc) => {
-          cats.push({ id: doc.id, ...doc.data() });
-        });
-        setCategories(cats);
-      });
-      return () => unsubscribe();
-    }
-  }, [user]);
+    if (!user || !type) return;
+
+    const q = query(
+      collection(db, "categories"),
+      where("userId", "==", user.uid),
+      where("type", "==", type), // ⬅️ Filter sesuai jenis transaksi
+      orderBy("name", "asc")
+    );
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const cats = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      setCategories(cats);
+    });
+
+    return () => unsubscribe();
+  }, [user, type]);
 
   // Ambil transaksi
   useEffect(() => {
