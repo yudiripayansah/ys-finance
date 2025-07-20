@@ -2,8 +2,8 @@ import './globals.css'
 import LayoutClient from './layoutClient'
 
 export const metadata = {
-  title: 'Aplikasi Keuangan',
-  description: 'Pencatatan keuangan sederhana dengan Firebase',
+  title: 'YS Finance',
+  description: 'Simple way to track your finance diary',
 }
 
 export default function RootLayout({ children }) {
