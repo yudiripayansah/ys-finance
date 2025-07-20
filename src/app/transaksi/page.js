@@ -219,7 +219,7 @@ export default function TransaksiPage() {
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md "
+              className=" p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md "
             />
             </div>
           </div>
@@ -272,7 +272,7 @@ export default function TransaksiPage() {
                 setFromDate(e.target.value);
                 setCurrentPage(1);
               }}
-              className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md w-full"
+              className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md"
             />
           </div>
         </div>
@@ -288,7 +288,7 @@ export default function TransaksiPage() {
                 setToDate(e.target.value);
                 setCurrentPage(1);
               }}
-              className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md w-full"
+              className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md"
             />
           </div>
         </div>
