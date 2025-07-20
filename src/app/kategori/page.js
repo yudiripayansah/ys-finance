@@ -162,7 +162,7 @@ export default function KategoriPage() {
   if (!user) return null;
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-6xl mx-auto px-4">
       <h1 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
         Kelola Kategori
       </h1>
@@ -209,7 +209,7 @@ export default function KategoriPage() {
 
       <div className="bg-white dark:bg-gray-800 p-4 rounded shadow space-y-3">
         {categories.map((category) => (
-          <div key={category.id} className="flex justify-between items-center p-2 bg-gray-100 dark:bg-gray-700 rounded">
+          <div key={category.id} className="flex justify-between items-center p-[20px] bg-gray-100 dark:bg-gray-700 rounded">
             {editingCategoryId === category.id ? (
               <div className="flex flex-col md:flex-row gap-2 w-full">
                 <input
@@ -231,8 +231,8 @@ export default function KategoriPage() {
             ) : (
               <>
                 <div>
-                  <p className="text-gray-800 dark:text-gray-200 font-medium">{category.name}</p>
-                  <span className={`text-xs px-2 py-1 rounded-full ${
+                  <p className="text-gray-800 dark:text-gray-200 font-medium mb-[5px]">{category.name}</p>
+                  <span className={`text-xs px-2 py-1 rounded-[5px] ${
                     category.type === "income"
                       ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
                       : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
@@ -241,8 +241,8 @@ export default function KategoriPage() {
                   </span>
                 </div>
                 <div className="flex gap-2">
-                  <button onClick={() => handleEdit(category)} className="text-blue-600 hover:underline text-sm">Edit</button>
-                  <button onClick={() => handleDelete(category.id)} className="text-red-600 hover:underline text-sm">Hapus</button>
+                  <button onClick={() => handleEdit(category)} className="text-white py-[5px] px-[10px] rounded-[5px] bg-blue-600 hover:bg-blue-700 text-sm">Edit</button>
+                  <button onClick={() => handleDelete(category.id)} className="text-white py-[5px] px-[10px] rounded-[5px] bg-red-800 hover:bg-red-900 text-sm">Hapus</button>
                 </div>
               </>
             )}

@@ -163,23 +163,23 @@ export default function TransaksiPage() {
   if (!user) return null;
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-6xl mx-auto px-4">
       <h1 className="text-2xl font-semibold mb-6">Transaksi</h1>
 
       {/* Form */}
       <div className="bg-white dark:bg-gray-800 shadow rounded-lg p-6 mb-8">
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <input
             type="text"
             value={amount}
             onChange={(e) => setAmount(formatNumber(e.target.value))}
             placeholder="Jumlah"
-            className="p-2 border rounded-md"
+            className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md col-span-2 md:col-span-1"
           />
           <select
             value={type}
             onChange={(e) => setType(e.target.value)}
-            className="p-2 border rounded-md"
+            className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md col-span-2 md:col-span-1"
           >
             <option value="income">Pemasukan</option>
             <option value="expense">Pengeluaran</option>
@@ -187,7 +187,7 @@ export default function TransaksiPage() {
           <select
             value={categoryId}
             onChange={(e) => setCategoryId(e.target.value)}
-            className="p-2 border rounded-md"
+            className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md col-span-2 md:col-span-1"
           >
             <option value="">Pilih Kategori</option>
             {categories.map((c) => (
@@ -200,18 +200,17 @@ export default function TransaksiPage() {
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="p-2 border rounded-md"
+            className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md col-span-2 md:col-span-1"
           />
-          <input
-            type="text"
+          <textarea
             value={note}
             onChange={(e) => setNote(e.target.value)}
             placeholder="Catatan (opsional)"
-            className="p-2 border rounded-md col-span-2"
+            className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md col-span-2"
           />
           <button
             type="submit"
-            className="bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
+            className="bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 col-span-2"
             disabled={isLoading}
           >
             {editingId ? "Update" : "Tambah"}
@@ -230,7 +229,7 @@ export default function TransaksiPage() {
             setCurrentPage(1);
           }}
           placeholder="Cari catatan atau kategori..."
-          className="p-2 border rounded-md w-full"
+          className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md w-full"
         />
         <input
           type="date"
@@ -239,7 +238,7 @@ export default function TransaksiPage() {
             setFromDate(e.target.value);
             setCurrentPage(1);
           }}
-          className="p-2 border rounded-md"
+          className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md"
         />
         <input
           type="date"
@@ -248,7 +247,7 @@ export default function TransaksiPage() {
             setToDate(e.target.value);
             setCurrentPage(1);
           }}
-          className="p-2 border rounded-md"
+          className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md"
         />
       </div>
 
@@ -259,11 +258,11 @@ export default function TransaksiPage() {
           {displayedTransactions.map((tx) => (
             <div
               key={tx.id}
-              className="flex justify-between items-center bg-gray-50 dark:bg-gray-700 p-4 rounded-md"
+              className="flex justify-between items-end bg-gray-50 dark:bg-gray-700 p-4 rounded-md"
             >
               <div>
-                <p className="font-semibold">{tx.categoryName}</p>
-                <p className="text-sm text-gray-500">{tx.note}</p>
+                <p className="font-semibold">{tx.note}</p>
+                <p className="text-sm text-gray-500">{tx.categoryName}</p>
                 <p className="text-xs text-gray-400">
                   {new Date(tx.date.seconds * 1000).toLocaleDateString()}
                 </p>
@@ -277,16 +276,16 @@ export default function TransaksiPage() {
                   {tx.type === "income" ? "+" : "-"} Rp
                   {tx.amount.toLocaleString("id-ID")}
                 </p>
-                <div className="flex gap-2 mt-2">
+                <div className="flex gap-2 mt-2 justify-end">
                   <button
                     onClick={() => handleEdit(tx)}
-                    className="text-sm text-blue-600 hover:underline"
+                    className="text-sm text-white py-[5px] px-[10px] rounded-[5px] bg-blue-600 hover:bg-blue-700"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDelete(tx.id)}
-                    className="text-sm text-red-600 hover:underline"
+                    className="text-sm text-white py-[5px] px-[10px] rounded-[5px] bg-red-800 hover:bg-red-900"
                   >
                     Hapus
                   </button>

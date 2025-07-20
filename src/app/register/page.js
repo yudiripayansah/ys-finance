@@ -1,26 +1,48 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../lib/firebase';
+import { db } from '../lib/firebase';
+import { doc, setDoc } from 'firebase/firestore';
 
 export default function RegisterPage() {
   const router = useRouter();
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
+  
+  // 👇 Redirect jika user sudah login
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        router.push('/dashboard');
+      }
+    });
+    return () => unsubscribe();
+  }, [router]);
   const handleRegister = async (e) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      router.push('/dashboard'); // redirect ke dashboard setelah sukses
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Simpan data user ke Firestore
+      await setDoc(doc(db, 'users', user.uid), {
+        uid: user.uid,
+        name,
+        email,
+        createdAt: new Date()
+      });
+
+      router.push('/dashboard');
     } catch (err) {
       setError(err.message);
     } finally {
@@ -39,6 +61,18 @@ export default function RegisterPage() {
         </h2>
 
         {error && <p className="text-red-500 mb-4 text-sm">{error}</p>}
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Nama</label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="mt-1 w-full p-2 border rounded-md bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            required
+            disabled={isLoading}
+          />
+        </div>
 
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>

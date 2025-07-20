@@ -86,7 +86,7 @@ export default function SettingsPage() {
   if (!user) return null;
 
   return (
-    <div className="max-w-xl mx-auto p-6">
+    <div className="max-w-4xl mx-auto px-4">
       <h1 className="text-2xl font-semibold mb-6">Pengaturan Akun</h1>
 
       {/* Ubah Nama */}
@@ -96,7 +96,7 @@ export default function SettingsPage() {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full p-2 border rounded-md mb-2"
+          className="w-full p-2 border dark:bg-gray-800 dark:text-white rounded-md mb-2"
         />
         <button
           onClick={updateName}
@@ -114,14 +114,14 @@ export default function SettingsPage() {
           type="password"
           value={currentPassword}
           onChange={(e) => setCurrentPassword(e.target.value)}
-          className="w-full p-2 border rounded-md mb-2"
+          className="w-full p-2 border dark:bg-gray-800 dark:text-white rounded-md mb-2"
         />
         <label className="block font-medium mb-1">Password Baru</label>
         <input
           type="password"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
-          className="w-full p-2 border rounded-md mb-2"
+          className="w-full p-2 border dark:bg-gray-800 dark:text-white rounded-md mb-2"
         />
         <button
           onClick={updateUserPassword}
