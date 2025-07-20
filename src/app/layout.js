@@ -3,7 +3,15 @@ import LayoutClient from './layoutClient'
 
 export const metadata = {
   title: 'YS Finance',
-  description: 'Simple way to track your finance diary',
+  description: 'Aplikasi Keuangan Pribadi by YS',
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'YS Finance',
+  },
+  themeColor: '#2563eb',
+  viewport: 'minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
 }
 
 export default function RootLayout({ children }) {
