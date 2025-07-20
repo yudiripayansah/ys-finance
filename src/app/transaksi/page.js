@@ -147,7 +147,9 @@ export default function TransaksiPage() {
 
   const filteredTransactions = transactions.filter((tx) => {
     const matchNote = tx.note?.toLowerCase().includes(search.toLowerCase());
-    const matchCategory = tx.categoryName?.toLowerCase().includes(search.toLowerCase());
+    const matchCategory = tx.categoryName
+      ?.toLowerCase()
+      .includes(search.toLowerCase());
     const matchDate =
       (!fromDate || new Date(tx.date.seconds * 1000) >= new Date(fromDate)) &&
       (!toDate || new Date(tx.date.seconds * 1000) <= new Date(toDate));
@@ -168,46 +170,66 @@ export default function TransaksiPage() {
 
       {/* Form */}
       <div className="bg-white dark:bg-gray-800 shadow rounded-lg p-6 mb-8">
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input
-            type="text"
-            value={amount}
-            onChange={(e) => setAmount(formatNumber(e.target.value))}
-            placeholder="Jumlah"
-            className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md col-span-2 md:col-span-1"
-          />
-          <select
-            value={type}
-            onChange={(e) => setType(e.target.value)}
-            className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md col-span-2 md:col-span-1"
-          >
-            <option value="income">Pemasukan</option>
-            <option value="expense">Pengeluaran</option>
-          </select>
-          <select
-            value={categoryId}
-            onChange={(e) => setCategoryId(e.target.value)}
-            className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md col-span-2 md:col-span-1"
-          >
-            <option value="">Pilih Kategori</option>
-            {categories.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.name}
-              </option>
-            ))}
-          </select>
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md col-span-2 md:col-span-1"
-          />
-          <textarea
-            value={note}
-            onChange={(e) => setNote(e.target.value)}
-            placeholder="Catatan (opsional)"
-            className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md col-span-2"
-          />
+        <form
+          onSubmit={handleSubmit}
+          className="grid grid-cols-1 md:grid-cols-2 gap-4"
+        >
+          <div className="col-span-2 md:col-span-1">
+            <label className="block text-sm font-medium mb-1">Jumlah</label>
+            <input
+              type="text"
+              value={amount}
+              onChange={(e) => setAmount(formatNumber(e.target.value))}
+              placeholder="Jumlah"
+              className="w-full p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md "
+            />
+          </div>
+          <div className="col-span-2 md:col-span-1">
+            <label className="block text-sm font-medium mb-1">
+              Jenis Transaksi
+            </label>
+            <select
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+              className="w-full p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md "
+            >
+              <option value="income">Pemasukan</option>
+              <option value="expense">Pengeluaran</option>
+            </select>
+          </div>
+          <div className="col-span-2 md:col-span-1">
+            <label className="block text-sm font-medium mb-1">Kategori</label>
+            <select
+              value={categoryId}
+              onChange={(e) => setCategoryId(e.target.value)}
+              className="w-full p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md "
+            >
+              <option value="">Pilih Kategori</option>
+              {categories.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="col-span-2 md:col-span-1">
+            <label className="block text-sm font-medium mb-1">Tanggal</label>
+            <input
+              type="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              className="w-full p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md "
+            />
+          </div>
+          <div className="col-span-2">
+            <label className="block text-sm font-medium mb-1">Catatan</label>
+            <textarea
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+              placeholder="Catatan (opsional)"
+              className="w-full p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md "
+            />
+          </div>
           <button
             type="submit"
             className="bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 col-span-2"
@@ -305,7 +327,9 @@ export default function TransaksiPage() {
               <button
                 key={i}
                 className={`px-3 py-1 rounded ${
-                  currentPage === i + 1 ? "bg-blue-600 text-white" : "bg-gray-200"
+                  currentPage === i + 1
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-200"
                 }`}
                 onClick={() => setCurrentPage(i + 1)}
               >

@@ -96,7 +96,7 @@ export default function SettingsPage() {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full p-2 border dark:bg-gray-800 dark:text-white rounded-md mb-2"
+          className="w-full p-2 border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md mb-2"
         />
         <button
           onClick={updateName}
@@ -114,14 +114,14 @@ export default function SettingsPage() {
           type="password"
           value={currentPassword}
           onChange={(e) => setCurrentPassword(e.target.value)}
-          className="w-full p-2 border dark:bg-gray-800 dark:text-white rounded-md mb-2"
+          className="w-full p-2 border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md mb-2"
         />
         <label className="block font-medium mb-1">Password Baru</label>
         <input
           type="password"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
-          className="w-full p-2 border dark:bg-gray-800 dark:text-white rounded-md mb-2"
+          className="w-full p-2 border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white rounded-md mb-2"
         />
         <button
           onClick={updateUserPassword}

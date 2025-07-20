@@ -168,24 +168,37 @@ export default function KategoriPage() {
       </h1>
 
       <div className="bg-white dark:bg-gray-800 p-4 rounded shadow mb-6">
-        <form onSubmit={handleAddCategory} className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
-          <input
-            type="text"
-            placeholder="Nama kategori"
-            className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-            value={newCategoryName}
-            onChange={(e) => setNewCategoryName(e.target.value)}
-            disabled={isLoading}
-          />
-          <select
-            value={newCategoryType}
-            onChange={(e) => setNewCategoryType(e.target.value)}
-            className="p-2 rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-            disabled={isLoading}
-          >
-            <option value="income">Pemasukan</option>
-            <option value="expense">Pengeluaran</option>
-          </select>
+        <form
+          onSubmit={handleAddCategory}
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end"
+        >
+          <div>
+            <label className="block text-sm font-medium mb-1">
+              Nama Kategori
+            </label>
+            <input
+              type="text"
+              placeholder="Nama kategori"
+              className="p-2 w-full rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              value={newCategoryName}
+              onChange={(e) => setNewCategoryName(e.target.value)}
+              disabled={isLoading}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">
+              Jenis Kategori
+            </label>
+            <select
+              value={newCategoryType}
+              onChange={(e) => setNewCategoryType(e.target.value)}
+              className="p-2 w-full rounded border bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              disabled={isLoading}
+            >
+              <option value="income">Pemasukan</option>
+              <option value="expense">Pengeluaran</option>
+            </select>
+          </div>
           <button
             type="submit"
             className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700 disabled:bg-blue-400"
@@ -209,7 +222,10 @@ export default function KategoriPage() {
 
       <div className="bg-white dark:bg-gray-800 p-4 rounded shadow space-y-3">
         {categories.map((category) => (
-          <div key={category.id} className="flex justify-between items-center p-[20px] bg-gray-100 dark:bg-gray-700 rounded">
+          <div
+            key={category.id}
+            className="flex justify-between items-center p-[20px] bg-gray-100 dark:bg-gray-700 rounded"
+          >
             {editingCategoryId === category.id ? (
               <div className="flex flex-col md:flex-row gap-2 w-full">
                 <input
@@ -225,24 +241,48 @@ export default function KategoriPage() {
                   <option value="income">Pemasukan</option>
                   <option value="expense">Pengeluaran</option>
                 </select>
-                <button onClick={handleUpdateCategory} className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">Simpan</button>
-                <button onClick={handleCancelEdit} className="bg-gray-400 text-white px-3 py-1 rounded hover:bg-gray-500">Batal</button>
+                <button
+                  onClick={handleUpdateCategory}
+                  className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700"
+                >
+                  Simpan
+                </button>
+                <button
+                  onClick={handleCancelEdit}
+                  className="bg-gray-400 text-white px-3 py-1 rounded hover:bg-gray-500"
+                >
+                  Batal
+                </button>
               </div>
             ) : (
               <>
                 <div>
-                  <p className="text-gray-800 dark:text-gray-200 font-medium mb-[5px]">{category.name}</p>
-                  <span className={`text-xs px-2 py-1 rounded-[5px] ${
-                    category.type === "income"
-                      ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
-                      : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
-                  }`}>
+                  <p className="text-gray-800 dark:text-gray-200 font-medium mb-[5px]">
+                    {category.name}
+                  </p>
+                  <span
+                    className={`text-xs px-2 py-1 rounded-[5px] ${
+                      category.type === "income"
+                        ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                        : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
+                    }`}
+                  >
                     {category.type === "income" ? "Pemasukan" : "Pengeluaran"}
                   </span>
                 </div>
                 <div className="flex gap-2">
-                  <button onClick={() => handleEdit(category)} className="text-white py-[5px] px-[10px] rounded-[5px] bg-blue-600 hover:bg-blue-700 text-sm">Edit</button>
-                  <button onClick={() => handleDelete(category.id)} className="text-white py-[5px] px-[10px] rounded-[5px] bg-red-800 hover:bg-red-900 text-sm">Hapus</button>
+                  <button
+                    onClick={() => handleEdit(category)}
+                    className="text-white py-[5px] px-[10px] rounded-[5px] bg-blue-600 hover:bg-blue-700 text-sm"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(category.id)}
+                    className="text-white py-[5px] px-[10px] rounded-[5px] bg-red-800 hover:bg-red-900 text-sm"
+                  >
+                    Hapus
+                  </button>
                 </div>
               </>
             )}
